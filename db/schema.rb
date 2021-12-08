@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_034738) do
+ActiveRecord::Schema.define(version: 2021_12_08_142556) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "videos", force: :cascade do |t|
     t.string "video"
+    t.string "title"
+    t.string "description"
+    t.integer "category_id"
+    t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_videos_on_category_id"
   end
 
 end

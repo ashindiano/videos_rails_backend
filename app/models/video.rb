@@ -1,4 +1,5 @@
 class Video < ApplicationRecord
+    belongs_to :category
     mount_uploader :video, VideoUploader
     # process_in_background :video
     
@@ -27,5 +28,6 @@ class Video < ApplicationRecord
         video.rescaled.url
         end
     end
-       
+
+    default_scope { where(:is_active => true) }
 end

@@ -5,3 +5,6 @@ brew install ffmpeg
 brew install ffmpegthumbnailer
 
 brew install imagemagick
+
+rails db:migrate
+rails db:seed
