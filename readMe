@@ -1,0 +1,7 @@
+brew install shared-mime-info
+
+brew install ffmpeg
+
+brew install ffmpegthumbnailer
+
+brew install imagemagick
