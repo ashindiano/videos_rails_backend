@@ -1,13 +1,24 @@
 class VideosController < ApplicationController
 
+    protect_from_forgery with: :exception
+
     def index
         @videos = Video.all
         render :json => @videos
     end
 
+    def show
+        @video = Video.find(params[:id])
+        render json: @video, status: :ok
+        rescue ActiveRecord::RecordNotFound => e
+            render json: {
+                error: e.to_s
+            }, status: :not_found
+    end
+
     def create
-       @video = Video.create(title: params[:title], description: params[:description], video: params[:video], category_id: params[:category_id])
-       render :json =>  @video
+       @video = Video.create(video_create_params)
+       render :json =>  @video, status: :ok
     end
 
     def activate
@@ -23,7 +34,7 @@ class VideosController < ApplicationController
     end
 
     def video_create_params
-        params
+        params.permit(:title,:video, :description, :category_id)
     end
 
     def video_update_params

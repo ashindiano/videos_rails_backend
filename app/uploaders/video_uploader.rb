@@ -18,17 +18,24 @@ class VideoUploader < CarrierWave::Uploader::Base
  end
 
  version :thumb do
-      process thumbnail: [{format: 'jpg', quality: 8, size: 360, logger: Rails.logger}]
+      process thumbnail: [{format: 'jpg', quality: 8, size: 256, logger: Rails.logger}]
       def full_filename for_file
           jpg_name for_file, version_name
       end
  end
 
  version :medium do
-       process thumbnail: [{format: 'jpg', quality: 85, size: 300, logger: Rails.logger}]
+       process thumbnail: [{format: 'jpg', quality: 85, size: 128, logger: Rails.logger}]
       def full_filename for_file
           jpg_name for_file, version_name
       end
+ end
+
+ version :small do
+    process thumbnail: [{format: 'jpg', quality: 85, size: 64, logger: Rails.logger}]
+   def full_filename for_file
+       jpg_name for_file, version_name
+   end
  end
 
 def encode
