@@ -10,3 +10,4 @@ rails db:migrate
 
 rails db:seed
 
+docker-compose run --service-ports web
