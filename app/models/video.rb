@@ -1,8 +1,9 @@
 class Video < ApplicationRecord
     belongs_to :category
+    validates :category, presence: true
     mount_uploader :video, VideoUploader, mount_on: :video
-    serialize :video, JSON 
-    # process_in_background :video
+    validates :title, presence: true
+    validates :description, length: { maximum: 500 }
     
     def set_success(format, opts)
         self.success = true

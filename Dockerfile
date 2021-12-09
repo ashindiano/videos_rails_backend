@@ -3,12 +3,10 @@ FROM ruby:3.0.2
 ENV BUNDLER_VERSION=2.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client shared-mime-info ffmpeg ffmpegthumbnailer imagemagick
 COPY . /caspar_rails_backend
+RUN rm -rf /caspar_rails_backend/public/uploads
 WORKDIR /caspar_rails_backend
 RUN bundle install
-RUN rm -rf /caspar_rails_backend/public/uploads
 RUN rails db:drop
-RUN rails db:migrate
-RUN rails db:seed
 
 # Add a script to be executed every time the container starts.
 COPY execute.sh /usr/bin/
