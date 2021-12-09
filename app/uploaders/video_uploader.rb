@@ -43,10 +43,6 @@ def encode
     video_transcode = video.transcode(@file.path)
 end
 
-# Create different versions of your uploaded files:
-version :image,:if => :image? do
-      process :resize_to_fit => [740, 300]
-end
 
 def jpg_name for_file, version_name
      %Q{#{version_name}_#{for_file.chomp(File.extname(for_file))}.jpg}

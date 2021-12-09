@@ -67,6 +67,8 @@ Things implemented
     5. Docker Containerization
     6. Video upload process to capture Thumbnail in 3 different sizes
     7. Carrierware Uploader
+    8. Basic Errorhandling in ApplicationController.rb
+    9. Strong Params
 
 
 Things that would be handled on actual environment
@@ -74,7 +76,8 @@ Things that would be handled on actual environment
     1. cors implementation
     2. Authentication and authorization ( SSO or Stand Alone )
     3. inmemory or redis caching to optimize record fetch based on ENV
-    4. concerns if complex business logic involved
-    5. rspec unit testcases on models and requests
-    6. branch based deployment Pipelines
-    7. Videos or assets uploaded to S3 storage or similar storage
+    4. rspec unit testcases on models and requests
+    5. branch based deployment Pipelines
+    6. Videos or assets uploaded to S3 storage or similar storage
+    7. Advanced and Customized error handling
+    8. before or after actions (filters) 

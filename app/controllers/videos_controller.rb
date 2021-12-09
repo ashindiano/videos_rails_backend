@@ -2,33 +2,31 @@ class VideosController < ApplicationController
 
     def index
         @videos = Video.offset(params[:offset]).limit(params[:limit])
-        render json: @videos, include: ['category'], meta: { total: Video.count }
+        render json: { meta: {total: Video.count},
+                       videos: @videos.as_json(include: {:category =>{only: [:name,:id] }}, only: [:title,:description,:video, :category] )
+                    }, status: :ok
     end
 
     def show
         @video = Video.find(params[:id])
-        render json: @video, status: :ok
-        rescue ActiveRecord::RecordNotFound => e
-            render json: {
-                error: e.to_s
-            }, status: :not_found
+        render json: @video.as_json(include: {:category =>{only: [:name,:id] }}, only: [:title,:description,:video, :category] ), status: :ok
     end
 
     def create
-       @video = Video.create(video_create_params)
-       render :json =>  @video, status: :ok
+       @video = Video.create!(video_create_params)
+       render :json =>  @video.as_json(include: {:category =>{only: [:name,:id] }}, only: [:title,:description,:video, :category] ), status: :ok
     end
 
     def activate
-        video = Video.find(video_update_params[:id])
-        video.active = true
-        video.save
+        @video = Video.find(video_update_params[:id])
+        @video.active = true
+        @video.save
     end
 
     def deactivate
-        video = Video.find(video_update_params[:id])
-        video.active = false
-        video.save
+        @video = Video.find(video_update_params[:id])
+        @video.active = false
+        @video.save
     end
 
     def video_create_params
