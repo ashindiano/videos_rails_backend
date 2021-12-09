@@ -5,6 +5,8 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client shared-mim
 COPY . /caspar_rails_backend
 WORKDIR /caspar_rails_backend
 RUN bundle install
+RUN rm -rf /caspar_rails_backend/public/uploads
+RUN rails db:drop
 RUN rails db:migrate
 RUN rails db:seed
 
