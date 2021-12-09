@@ -1,10 +1,8 @@
 class VideosController < ApplicationController
 
-    protect_from_forgery with: :exception
-
     def index
-        @videos = Video.all
-        render :json => @videos
+        @videos = Video.offset(params[:offset]).limit(params[:limit])
+        render json: @videos, include: ['category'], meta: { total: Video.count }
     end
 
     def show

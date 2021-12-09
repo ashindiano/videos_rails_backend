@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
     belongs_to :category
-    mount_uploader :video, VideoUploader
+    mount_uploader :video, VideoUploader, mount_on: :video
+    serialize :video, JSON 
     # process_in_background :video
     
     def set_success(format, opts)
